@@ -14,17 +14,11 @@ app.use(compression());
 // init db
 require("./dbs/init.mongodb");
 
-const { checkOverLoad } = require("./helpers/check.connect");
-checkOverLoad();
+// const { checkOverLoad } = require("./helpers/check.connect");
+// checkOverLoad();
 
 // init routes
-app.get("/", (req, res, next) => {
-  const strCompress = "Hello he he ";
-  return res.status(200).json({
-    message: "welcome hi hi ",
-    metadata: strCompress.repeat(10000),
-  });
-});
+app.use("/", require("./routes/index"));
 
 // handling error
 
