@@ -1,6 +1,8 @@
 "use strict";
 
 const express = require("express");
+const AccessService = require("../services/access.service");
+
 const app = express();
 
 app.use(express.json());
@@ -16,10 +18,7 @@ class AccessController {
       console.log(`[P]::signUp::`, req.body);
       // 200 OK
       // 201 CREATED
-      return await res.status(201).json({
-        code: "20001",
-        metadata: { userId: 1 },
-      });
+      return await res.status(201).json(await AccessService.signUp(req.body));
     } catch (error) {
       next(error);
     }

@@ -20,8 +20,8 @@ app.use(
 // init db
 require("./dbs/init.mongodb");
 
-// const { checkOverLoad } = require("./helpers/check.connect");
-// checkOverLoad();
+const { checkOverLoad } = require("./helpers/check.connect");
+checkOverLoad();
 
 // init routes
 app.use("/", require("./routes/index"));
