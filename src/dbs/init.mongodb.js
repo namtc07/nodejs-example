@@ -7,7 +7,7 @@ const {
 } = require("../configs/config.mongodb");
 
 const connectString = `mongodb://${host}:${port}/${name}`;
-
+console.log(connectString);
 class Database {
   constructor() {
     this.connect();
@@ -24,7 +24,10 @@ class Database {
       .connect(connectString, {
         maxPoolSize: 50,
       })
-      .then((_) => console.log("Connected Mongodb Success <3", countConnect()))
+      .then((_) => {
+        console.log("Connected Mongodb Success <3");
+        countConnect();
+      })
       .catch((err) => console.log("Error Connect!!!", err));
   }
 
