@@ -16,6 +16,17 @@ const RoleShop = {
 };
 
 class AccessService {
+  /*
+    1. Check email in dbs
+    2. Match password
+    3. Create AT vs RT and save
+    4. Generate tokens
+    5. Get data return login
+  */
+  static login = async ({ email, password, refreshToken = null }) => {
+    const foundShop = await 
+  };
+
   static signUp = async ({ name, email, password }) => {
     const holderShop = await shopModal.findOne({ email }).lean();
 
