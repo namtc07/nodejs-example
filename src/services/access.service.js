@@ -30,7 +30,7 @@ class AccessService {
     if (!foundShop) throw new BadRequestError("Shop not registered!");
 
     // 2.
-    bcrypt.compare(password, foundShop.math).then((result) => {
+    bcrypt.compare(password, foundShop.password).then((result) => {
       if (!result) throw new AuthFailureError("Authentication error!");
     });
 
