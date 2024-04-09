@@ -1,6 +1,6 @@
 "use strict";
 
-const { Schema, model } = require("mongoose"); // Erase if already required
+const { Schema, model, Types } = require("mongoose"); // Erase if already required
 
 const DOCUMENT_NAME = "Key";
 const COLLECTION_NAME = "Keys";
@@ -9,7 +9,7 @@ const COLLECTION_NAME = "Keys";
 var keyTokenSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: Types.ObjectId,
       required: true,
       ref: "Shop",
     },
