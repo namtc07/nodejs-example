@@ -9,10 +9,11 @@ const HEADER = {
 
 const apiKey = async (req, res, next) => {
   try {
-    const key = req.headers[HEADER.API_KEY]?.toString();
+    const key = req.headers[HEADER.API_KEY];
+    console.log("req.headers:::", req.headers[HEADER.API_KEY]);
     if (!key) {
       return res.status(403).json({
-        message: "Forbidden Error",
+        message: "Forbidden Error key",
       });
     }
 
@@ -20,7 +21,7 @@ const apiKey = async (req, res, next) => {
     const objKey = await findById(key);
     if (!objKey) {
       return res.status(403).json({
-        message: "Forbidden Error",
+        message: "Forbidden Error objKey",
       });
     }
     req.objKey = objKey;

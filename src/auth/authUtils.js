@@ -12,15 +12,13 @@ const HEADER = {
 };
 
 const createTokenPair = async (payload, publicKey, privateKey) => {
+  console.log("payloadpayload:::", payload);
   try {
-    // accessToken
     const accessToken = await JWT.sign(payload, publicKey, {
-      // algorithm: "RS256",
       expiresIn: "2 days",
     });
 
     const refreshToken = await JWT.sign(payload, privateKey, {
-      // algorithm: "RS256",
       expiresIn: "7 days",
     });
 
@@ -42,15 +40,6 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
 };
 
 const authentication = asyncHandler(async (req, res, next) => {
-  /*
-    1. Check userId missing?
-    2. Get accessToken
-    3. Verify token
-    4. Check user in dbs
-    5. Check keyStore with this userId
-    6. Ok all => return next()
-  */
-
   const userId = req.headers[HEADER.CLIENT_ID];
   if (!userId) throw new AuthFailureError("Invalid Request");
 
@@ -59,10 +48,12 @@ const authentication = asyncHandler(async (req, res, next) => {
 
   const accessToken = req.headers[HEADER.AUTHORIZATION];
   if (!accessToken) throw new AuthFailureError("Invalid Request accessToken");
-
+  // console.log("req.headers:::", req.headers);
+  // console.log("keyStore:::", keyStore);
+  // console.log("accessToken:::", accessToken);
   try {
     const decodeUser = JWT.verify(accessToken, keyStore.privateKey);
-    console.log("decodeUser::", decodeUser);
+    console.log("decodeUser:::", decodeUser);
     if (userId !== decodeUser.userId) throw new AuthFailureError("Invalid UserId");
     req.keyStore = keyStore;
     return next();
